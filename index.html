@@ -74,29 +74,69 @@
     }
 
     .logo-box {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--primary), #002b36);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
       font-size: 2.2rem;
-      box-shadow: var(--neon-shadow), inset 0 0 30px rgba(0, 0, 0, 0.6);
       margin-bottom: 20px;
       border: 3px solid var(--primary);
       animation: pulse 4s infinite alternate;
+      transition: transform 0.5s, box-shadow 0.5s;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.5s;
     }
 
     .logo-box:hover {
-      transform: scale(1.05) rotate(5deg);
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0, 234, 255, 0.8), 0 0 60px rgba(34, 255, 136, 0.4);
+    }
+
+    .logo-box:hover img {
+      transform: scale(1.05);
+    }
+
+    .logo-box::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary), transparent);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .logo-box:hover::after {
+      opacity: 0.3;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 20px rgba(0, 234, 255, 0.7), inset 0 0 30px rgba(0, 0, 0, 0.6); }
-      100% { box-shadow: 0 0 35px rgba(0, 234, 255, 0.9), 0 0 50px rgba(34, 255, 136, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.6); }
+      0% { 
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.5), 0 0 30px rgba(0, 234, 255, 0.2);
+      }
+      100% { 
+        box-shadow: 0 0 35px rgba(0, 234, 255, 0.8), 0 0 50px rgba(34, 255, 136, 0.3);
+      }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     header h1 {
@@ -424,6 +464,22 @@
       z-index: 2;
     }
 
+    .footer-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      border: 2px solid var(--primary);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+    }
+
+    .footer-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .social-icons {
       display: flex;
       justify-content: center;
@@ -458,6 +514,39 @@
       font-size: 0.9rem;
     }
 
+    /* Floating Logo Badge */
+    .floating-logo {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
+      z-index: 100;
+      animation: float 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .floating-logo:hover {
+      transform: scale(1.1);
+    }
+
+    .floating-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       header h1 {
@@ -465,9 +554,8 @@
       }
       
       .logo-box {
-        width: 120px;
-        height: 120px;
-        font-size: 1.8rem;
+        width: 140px;
+        height: 140px;
       }
       
       .price-amount {
@@ -486,14 +574,28 @@
       .grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       }
+      
+      .floating-logo {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Floating Logo -->
+  <div class="floating-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <img src="https://i.ibb.co/G4mNPfXn/RD32353537373537313037373440732e77686174736170702e6e6574-673214.jpg" alt="DarkX Logo">
+  </div>
+
   <header>
     <div class="container">
       <div class="logo-container">
-        <div class="logo-box">DX</div>
+        <div class="logo-box">
+          <img src="https://i.ibb.co/G4mNPfXn/RD32353537373537313037373440732e77686174736170702e6e6574-673214.jpg" alt="DarkX Official Logo">
+        </div>
         <h1>DarkX Official</h1>
         <p class="tagline">🔥 Premium Future Logos • Gang Branding • DP Designs • Exclusive Graphics 🔥</p>
       </div>
@@ -529,7 +631,7 @@
           <div class="card-info">
             <h3 class="card-title">DarkX Signature</h3>
             <p class="card-description">Futuristic logo with neon elements and cyberpunk aesthetics</p>
-            <span class="card-badge">MOST POPULAR</span>
+            <span class="card-badge">OUR SIGNATURE LOGO</span>
           </div>
         </div>
         
@@ -650,8 +752,8 @@
   <footer>
     <div class="container">
       <div class="footer-content">
-        <div class="logo-box" style="width: 100px; height: 100px; font-size: 1.5rem; margin: 0 auto 20px;">
-          DX
+        <div class="footer-logo">
+          <img src="https://i.ibb.co/G4mNPfXn/RD32353537373537313037373440732e77686174736170702e6e6574-673214.jpg" alt="DarkX Logo">
         </div>
         
         <h3 style="font-size: 1.8rem; margin-bottom: 10px;">DarkX Official</h3>
@@ -736,6 +838,17 @@
           }, 600);
         });
       });
+      
+      // Add logo glow effect on scroll
+      const headerLogo = document.querySelector('.logo-box');
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        if (scrollPosition > 100) {
+          headerLogo.style.boxShadow = '0 0 25px rgba(0, 234, 255, 0.6)';
+        } else {
+          headerLogo.style.boxShadow = '';
+        }
+      });
     });
     
     // Add ripple effect styles dynamically
@@ -759,4 +872,4 @@
     document.head.appendChild(style);
   </script>
 </body>
-</html>
+  </html>
