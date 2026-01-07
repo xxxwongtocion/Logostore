@@ -10,29 +10,33 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', 'Montserrat', sans-serif;
+      font-family: 'Segoe UI', 'Montserrat', 'Poppins', sans-serif;
     }
 
     :root {
-      --primary: #00eaff;
-      --secondary: #22ff88;
-      --accent: #ff00cc;
-      --dark-bg: #0a0a12;
-      --card-bg: #13132a;
-      --text: #f5f5f5;
-      --text-secondary: #b0b0d0;
-      --gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      --neon-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+      --primary: #ff0055;
+      --secondary: #00ffcc;
+      --accent: #9d00ff;
+      --dark-bg: #0a0a14;
+      --card-bg: rgba(30, 30, 46, 0.9);
+      --text: #ffffff;
+      --text-secondary: #b8b8d0;
+      --gradient: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      --neon-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
     body {
       background-color: var(--dark-bg);
       color: var(--text);
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(34, 34, 60, 0.5) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(32, 58, 67, 0.4) 0%, transparent 20%);
+        radial-gradient(circle at 15% 30%, rgba(255, 0, 85, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 85% 70%, rgba(0, 255, 204, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, rgba(157, 0, 255, 0.05) 0%, transparent 50%);
       min-height: 100vh;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     .container {
@@ -41,27 +45,17 @@
       padding: 0 20px;
     }
 
-    /* Header */
+    /* Header - Glassmorphism Design */
     header {
-      padding: 40px 0;
+      padding: 30px 0;
       text-align: center;
-      background: var(--gradient);
-      position: relative;
-      overflow: hidden;
-      border-bottom: 3px solid var(--primary);
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
+      background: rgba(10, 10, 20, 0.7);
+      backdrop-filter: blur(10px);
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 234, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(34, 255, 136, 0.1) 0%, transparent 50%);
+      z-index: 1000;
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
     }
 
     .logo-container {
@@ -70,154 +64,143 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      z-index: 2;
     }
 
     .logo-box {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      border-radius: 25px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 900;
-      font-size: 2.2rem;
       margin-bottom: 20px;
-      border: 3px solid var(--primary);
-      animation: pulse 4s infinite alternate;
-      transition: transform 0.5s, box-shadow 0.5s;
+      border: 2px solid var(--primary);
+      animation: pulse-glow 3s infinite alternate;
+      transition: all 0.4s ease;
       overflow: hidden;
       background: rgba(0, 0, 0, 0.3);
       position: relative;
+      box-shadow: 0 10px 30px rgba(255, 0, 85, 0.3);
+      transform: rotate(45deg);
     }
 
     .logo-box img {
-      width: 100%;
-      height: 100%;
+      width: 140%;
+      height: 140%;
       object-fit: cover;
+      transform: rotate(-45deg);
       transition: transform 0.5s;
+      filter: brightness(1.1) contrast(1.1);
     }
 
     .logo-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(0, 234, 255, 0.8), 0 0 60px rgba(34, 255, 136, 0.4);
+      transform: rotate(45deg) scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 0, 85, 0.7), 0 0 80px rgba(0, 255, 204, 0.4);
     }
 
     .logo-box:hover img {
-      transform: scale(1.05);
+      transform: rotate(-45deg) scale(1.05);
     }
 
-    .logo-box::after {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, var(--primary), var(--secondary), transparent);
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .logo-box:hover::after {
-      opacity: 0.3;
-    }
-
-    @keyframes pulse {
+    @keyframes pulse-glow {
       0% { 
-        box-shadow: 0 0 20px rgba(0, 234, 255, 0.5), 0 0 30px rgba(0, 234, 255, 0.2);
+        box-shadow: 0 0 20px rgba(255, 0, 85, 0.5), 0 0 30px rgba(255, 0, 85, 0.2);
       }
       100% { 
-        box-shadow: 0 0 35px rgba(0, 234, 255, 0.8), 0 0 50px rgba(34, 255, 136, 0.3);
+        box-shadow: 0 0 30px rgba(255, 0, 85, 0.8), 0 0 50px rgba(0, 255, 204, 0.3);
       }
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     header h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       margin-bottom: 10px;
-      text-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+      font-weight: 800;
     }
 
     .tagline {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       opacity: 0.9;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 10px 20px;
-      border-radius: 30px;
-      border: 1px solid rgba(0, 234, 255, 0.2);
+      background: var(--glass-bg);
+      padding: 10px 25px;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(5px);
     }
 
     /* Hero Pricing Section */
     .hero-pricing {
-      padding: 60px 0;
+      padding: 80px 0;
       text-align: center;
     }
 
     .price-card {
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 20px;
+      background: var(--glass-bg);
+      padding: 50px 40px;
+      border-radius: 25px;
       margin-bottom: 30px;
-      box-shadow: var(--neon-shadow), 0 10px 30px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(0, 234, 255, 0.3);
+      box-shadow: var(--neon-shadow), 0 20px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--glass-border);
       position: relative;
       overflow: hidden;
       max-width: 800px;
       margin: 0 auto;
+      backdrop-filter: blur(10px);
     }
 
     .price-card::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(0, 234, 255, 0.1), transparent);
-      transform: rotate(45deg);
-      z-index: 1;
-    }
-
-    .price-card > * {
-      position: relative;
-      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
     }
 
     .price-card h2 {
       color: var(--primary);
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       font-size: 2.2rem;
     }
 
     .price-amount {
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 900;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       margin: 20px 0;
-      text-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+      text-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+      position: relative;
+      display: inline-block;
+    }
+
+    .price-amount::after {
+      content: 'ONLY';
+      position: absolute;
+      bottom: -25px;
+      right: -30px;
+      font-size: 1rem;
+      background: var(--primary);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
     }
 
     .price-note {
       color: var(--text-secondary);
       margin: 15px 0 30px;
       font-size: 1.1rem;
+      line-height: 1.8;
     }
 
     .cta-buttons {
@@ -228,64 +211,79 @@
       margin-top: 30px;
     }
 
-    /* Buttons */
+    /* Buttons - Updated Style */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 15px 30px;
-      border-radius: 50px;
+      padding: 16px 35px;
+      border-radius: 12px;
       font-weight: 700;
       font-size: 1.1rem;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
-      gap: 10px;
-      min-width: 200px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      gap: 12px;
+      min-width: 220px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-primary {
-      background: linear-gradient(to right, var(--primary), #00a3cc);
-      color: #000;
+      background: linear-gradient(135deg, var(--primary), #cc0044);
+      color: white;
     }
 
     .btn-primary:hover {
-      background: linear-gradient(to right, #00ccff, var(--primary));
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 234, 255, 0.4);
+      background: linear-gradient(135deg, #ff3366, var(--primary));
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(255, 0, 85, 0.5);
     }
 
     .btn-secondary {
-      background: linear-gradient(to right, var(--secondary), #00cc66);
+      background: linear-gradient(135deg, var(--secondary), #00cc99);
       color: #000;
     }
 
     .btn-secondary:hover {
-      background: linear-gradient(to right, #33ff99, var(--secondary));
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(34, 255, 136, 0.4);
+      background: linear-gradient(135deg, #33ffd6, var(--secondary));
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 255, 204, 0.5);
     }
 
     .btn-whatsapp {
-      background: linear-gradient(to right, #25D366, #128C7E);
+      background: linear-gradient(135deg, #25D366, #128C7E);
       color: white;
     }
 
     .btn-whatsapp:hover {
-      background: linear-gradient(to right, #2efc7c, #25D366);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+      background: linear-gradient(135deg, #4ae37c, #25D366);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn-promo {
+      background: linear-gradient(135deg, var(--accent), #7a00cc);
+      color: white;
+    }
+
+    .btn-promo:hover {
+      background: linear-gradient(135deg, #b84dff, var(--accent));
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(157, 0, 255, 0.5);
     }
 
     /* Section Titles */
     .section-title {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       margin-bottom: 40px;
       padding-bottom: 15px;
       position: relative;
       text-align: center;
+      font-weight: 800;
     }
 
     .section-title::after {
@@ -294,46 +292,63 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
+      width: 120px;
+      height: 5px;
       background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 2px;
+      border-radius: 3px;
     }
 
-    /* Logo Gallery */
+    /* Logo Gallery - Masonry Style */
     .gallery {
-      padding: 60px 0;
+      padding: 80px 0;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
+      grid-auto-rows: 250px;
+      grid-auto-flow: dense;
     }
 
     .card {
-      background: var(--card-bg);
-      border-radius: 16px;
+      background: var(--glass-bg);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
       transition: all 0.4s ease;
-      border: 1px solid rgba(0, 234, 255, 0.1);
+      border: 1px solid var(--glass-border);
       height: 100%;
       display: flex;
       flex-direction: column;
+      backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    .card:nth-child(3n+1) {
+      grid-row: span 2;
+    }
+
+    .card:nth-child(2n) {
+      grid-column: span 1;
     }
 
     .card:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 15px 30px rgba(0, 234, 255, 0.4), 0 0 40px rgba(0, 234, 255, 0.2);
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(255, 0, 85, 0.3), 0 0 60px rgba(255, 0, 85, 0.1);
       border-color: var(--primary);
     }
 
     .card-img {
       width: 100%;
-      height: 220px;
+      height: 180px;
       object-fit: cover;
-      border-bottom: 2px solid rgba(0, 234, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 0, 85, 0.2);
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.05);
     }
 
     .card-info {
@@ -346,54 +361,64 @@
     }
 
     .card-title {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       margin-bottom: 10px;
       color: var(--primary);
+      font-weight: 700;
     }
 
     .card-description {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 1rem;
       margin-bottom: 15px;
+      line-height: 1.6;
     }
 
     .card-badge {
       display: inline-block;
-      background: rgba(0, 234, 255, 0.1);
+      background: rgba(255, 0, 85, 0.1);
       color: var(--primary);
-      padding: 5px 12px;
+      padding: 6px 15px;
       border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
       align-self: center;
-      border: 1px solid rgba(0, 234, 255, 0.3);
+      border: 1px solid rgba(255, 0, 85, 0.3);
     }
 
     /* Promo Section */
     .promo-section {
-      padding: 60px 0;
+      padding: 80px 0;
     }
 
     .promo-container {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
+      justify-content: center;
     }
 
     .promo-card {
       flex: 1;
       min-width: 300px;
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 0, 204, 0.2);
+      max-width: 500px;
+      background: var(--glass-bg);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(157, 0, 255, 0.2);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-10px);
     }
 
     .promo-card h3 {
       color: var(--accent);
       margin-bottom: 20px;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -402,6 +427,7 @@
     .promo-highlight {
       color: var(--secondary);
       font-weight: 700;
+      font-size: 1.1rem;
     }
 
     .promo-divider {
@@ -412,37 +438,50 @@
 
     /* Benefits Section */
     .benefits {
-      padding: 60px 0;
-      background: rgba(10, 10, 20, 0.7);
+      padding: 80px 0;
+      background: rgba(10, 10, 20, 0.5);
       margin-top: 40px;
-      border-top: 1px solid rgba(0, 234, 255, 0.2);
-      border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .benefits-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
 
     .benefit-item {
       text-align: center;
-      padding: 25px;
-      background: rgba(19, 19, 42, 0.7);
-      border-radius: 12px;
-      border: 1px solid rgba(0, 234, 255, 0.1);
+      padding: 30px;
+      background: var(--glass-bg);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
     }
 
     .benefit-icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .benefit-item h3 {
+      font-size: 1.5rem;
       margin-bottom: 15px;
+      color: var(--secondary);
     }
 
     /* Footer */
     footer {
-      background: #020617;
-      padding: 50px 0 30px;
+      background: rgba(5, 5, 15, 0.9);
+      padding: 60px 0 30px;
       text-align: center;
       border-top: 3px solid var(--primary);
       position: relative;
@@ -456,7 +495,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 50% 0%, rgba(0, 234, 255, 0.05) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 0%, rgba(255, 0, 85, 0.05) 0%, transparent 70%);
     }
 
     .footer-content {
@@ -467,51 +506,55 @@
     .footer-logo {
       width: 120px;
       height: 120px;
-      border-radius: 50%;
+      border-radius: 25px;
       margin: 0 auto 20px;
       border: 2px solid var(--primary);
       overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.5);
+      transform: rotate(45deg);
     }
 
     .footer-logo img {
-      width: 100%;
-      height: 100%;
+      width: 140%;
+      height: 140%;
       object-fit: cover;
+      transform: rotate(-45deg);
     }
 
     .social-icons {
       display: flex;
       justify-content: center;
       gap: 20px;
-      margin: 25px 0;
+      margin: 30px 0;
     }
 
     .social-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(0, 234, 255, 0.1);
+      width: 55px;
+      height: 55px;
+      border-radius: 12px;
+      background: rgba(255, 0, 85, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary);
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       transition: all 0.3s ease;
-      border: 1px solid rgba(0, 234, 255, 0.2);
+      border: 1px solid rgba(255, 0, 85, 0.2);
+      text-decoration: none;
     }
 
     .social-icon:hover {
       background: var(--primary);
-      color: #000;
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 234, 255, 0.4);
+      color: white;
+      transform: translateY(-5px) rotate(5deg);
+      box-shadow: 0 10px 20px rgba(255, 0, 85, 0.4);
     }
 
     .copyright {
       opacity: 0.7;
       margin-top: 30px;
       font-size: 0.9rem;
+      color: var(--text-secondary);
     }
 
     /* Floating Logo Badge */
@@ -521,49 +564,153 @@
       right: 30px;
       width: 70px;
       height: 70px;
-      border-radius: 50%;
+      border-radius: 20px;
       overflow: hidden;
       border: 2px solid var(--primary);
-      box-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
-      z-index: 100;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+      z-index: 1000;
       animation: float 3s ease-in-out infinite;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: all 0.3s ease;
+      transform: rotate(45deg);
     }
 
     .floating-logo:hover {
-      transform: scale(1.1);
+      transform: rotate(45deg) scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 0, 85, 0.8);
     }
 
     .floating-logo img {
-      width: 100%;
-      height: 100%;
+      width: 140%;
+      height: 140%;
       object-fit: cover;
+      transform: rotate(-45deg);
     }
 
     @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0% { transform: rotate(45deg) translateY(0px); }
+      50% { transform: rotate(45deg) translateY(-15px); }
+      100% { transform: rotate(45deg) translateY(0px); }
+    }
+
+    /* Order Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 25px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 50px rgba(255, 0, 85, 0.3);
+      border: 2px solid var(--primary);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: var(--primary);
+    }
+
+    .modal h3 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
     }
 
     /* Responsive */
+    @media (max-width: 992px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .card:nth-child(3n+1) {
+        grid-row: span 1;
+      }
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2.2rem;
       }
       
       .logo-box {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
       }
       
       .price-amount {
-        font-size: 2.8rem;
+        font-size: 3.2rem;
       }
       
       .btn {
         min-width: 100%;
+        padding: 14px 25px;
       }
       
       .cta-buttons {
@@ -581,10 +728,75 @@
         bottom: 20px;
         right: 20px;
       }
+      
+      .modal-content {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .price-card {
+        padding: 30px 20px;
+      }
+      
+      .price-amount {
+        font-size: 2.8rem;
+      }
+      
+      .promo-card {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h3>Order Your Logo</h3>
+      <p>Fill out this form and we'll contact you on WhatsApp to discuss your logo design.</p>
+      
+      <form class="modal-form" id="orderForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp Number</label>
+          <input type="tel" id="whatsapp" placeholder="255XXXXXXXXX" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="logoType">Logo Type</label>
+          <select id="logoType" required>
+            <option value="">Select logo type</option>
+            <option value="future">Future Logo</option>
+            <option value="gang">Gang Branding</option>
+            <option value="dp">Display Picture</option>
+            <option value="cyber">Cyber Style</option>
+            <option value="dark">Dark Style</option>
+            <option value="exclusive">Exclusive Design</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="details">Logo Details / Requirements</label>
+          <textarea id="details" placeholder="Describe what you want in your logo (colors, style, text, etc.)" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">
+          <i class="fab fa-whatsapp"></i> Submit & Continue on WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Floating Logo -->
   <div class="floating-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     <img src="https://i.ibb.co/G4mNPfXn/RD32353537373537313037373440732e77686174736170702e6e6574-673214.jpg" alt="DarkX Logo">
@@ -606,16 +818,19 @@
     <div class="container">
       <div class="price-card">
         <h2>Premium Logo Design</h2>
-        <p class="price-note">High-quality, custom-designed logos for your brand, gang, or personal identity</p>
+        <p class="price-note">High-quality, custom-designed logos for your brand, gang, or personal identity. Get a unique design that stands out.</p>
         <div class="price-amount">500 TSH</div>
-        <p class="price-note">Per Logo • 100% Custom • Fast Delivery</p>
+        <p class="price-note">Per Logo • 100% Custom • Fast Delivery • Revisions Included</p>
         
         <div class="cta-buttons">
-          <a class="btn btn-primary" href="https://wa.me/255775710774?text=Hello%20DarkX%20Official!%20I%20want%20to%20order%20a%20logo.">
-            <i class="fab fa-whatsapp"></i> Order Now on WhatsApp
+          <button class="btn btn-primary" id="orderButton">
+            <i class="fas fa-shopping-cart"></i> Order Logo Now
+          </button>
+          <a class="btn btn-whatsapp" href="https://wa.me/255775710774?text=Hello%20DarkX%20Official!%20I%20want%20to%20order%20a%20logo." target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp Direct
           </a>
-          <a class="btn btn-secondary" href="https://whatsapp.com/channel/0029Vb7DYeT1SWsvrVaGWL2Y">
-            <i class="fas fa-broadcast-tower"></i> Join Our Channel
+          <a class="btn btn-secondary" href="https://whatsapp.com/channel/0029Vb7DYeT1SWsvrVaGWL2Y" target="_blank">
+            <i class="fas fa-broadcast-tower"></i> Join Channel
           </a>
         </div>
       </div>
@@ -729,8 +944,8 @@
         <div class="promo-card">
           <h3><i class="fas fa-star"></i> Top Promotion</h3>
           <p><strong>QUEEN 🫦SUGER🎀🍯 WhatsApp Channel</strong></p>
-          <p>Follow for exclusive content, updates, and behind-the-scenes looks</p>
-          <a class="btn btn-whatsapp" href="https://whatsapp.com/channel/0029VbBsNFnBlHphdyLxNJ17" style="margin-top: 20px;">
+          <p>Follow for exclusive content, updates, and behind-the-scenes looks at our latest designs.</p>
+          <a class="btn btn-promo" href="https://whatsapp.com/channel/0029VbBsNFnBlHphdyLxNJ17" target="_blank">
             <i class="fab fa-whatsapp"></i> Visit Channel
           </a>
         </div>
@@ -738,10 +953,10 @@
         <div class="promo-card">
           <h3><i class="fas fa-bullhorn"></i> Get Promoted</h3>
           <p><strong>Want to be featured here?</strong></p>
-          <p>Promote your business, channel, or brand to our engaged audience</p>
+          <p>Promote your business, channel, or brand to our engaged audience of design enthusiasts.</p>
           <div class="promo-divider"></div>
           <p class="promo-highlight">Contact us for promotion rates and packages</p>
-          <a class="btn btn-primary" href="https://wa.me/255775710774?text=I%20want%20to%20promote%20my%20business%20on%20DarkX%20Official" style="margin-top: 20px;">
+          <a class="btn btn-primary" href="https://wa.me/255775710774?text=I%20want%20to%20promote%20my%20business%20on%20DarkX%20Official" target="_blank">
             <i class="fas fa-chart-line"></i> Get Promotion
           </a>
         </div>
@@ -760,106 +975,171 @@
         <p>Future Branding & Premium Logo Design</p>
         
         <div class="social-icons">
-          <a class="social-icon" href="https://wa.me/255775710774">
+          <a class="social-icon" href="https://wa.me/255775710774" target="_blank">
             <i class="fab fa-whatsapp"></i>
           </a>
-          <a class="social-icon" href="https://whatsapp.com/channel/0029Vb7DYeT1SWsvrVaGWL2Y">
+          <a class="social-icon" href="https://whatsapp.com/channel/0029Vb7DYeT1SWsvrVaGWL2Y" target="_blank">
             <i class="fas fa-broadcast-tower"></i>
           </a>
-          <a class="social-icon" href="#">
+          <a class="social-icon" href="mailto:darkxofficial@example.com">
             <i class="fas fa-envelope"></i>
           </a>
         </div>
         
-        <p class="copyright">© 2099 DarkX Official • Future Branding • All Rights Reserved</p>
+        <div class="cta-buttons" style="margin-top: 30px;">
+          <button class="btn btn-primary" id="footerOrderButton">
+            <i class="fas fa-shopping-cart"></i> Order Your Logo
+          </button>
+        </div>
+        
+        <p class="copyright">© 2023 DarkX Official • Future Branding • All Rights Reserved</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Add interactive animations
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add hover effect to cards
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-          this.style.zIndex = '10';
-        });
+    // Modal functionality
+    const orderModal = document.getElementById('orderModal');
+    const orderButton = document.getElementById('orderButton');
+    const footerOrderButton = document.getElementById('footerOrderButton');
+    const closeModal = document.getElementById('closeModal');
+    const orderForm = document.getElementById('orderForm');
+
+    // Open modal when order button is clicked
+    orderButton.addEventListener('click', () => {
+      orderModal.style.display = 'flex';
+    });
+
+    // Open modal from footer button
+    footerOrderButton.addEventListener('click', () => {
+      orderModal.style.display = 'flex';
+    });
+
+    // Close modal when X is clicked
+    closeModal.addEventListener('click', () => {
+      orderModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal
+    window.addEventListener('click', (e) => {
+      if (e.target === orderModal) {
+        orderModal.style.display = 'none';
+      }
+    });
+
+    // Handle form submission
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const logoType = document.getElementById('logoType').value;
+      const details = document.getElementById('details').value;
+      
+      // Create WhatsApp message
+      const message = `Hello DarkX Official!%0A%0A*New Logo Order*%0A%0A*Name:* ${name}%0A*WhatsApp:* ${whatsapp}%0A*Logo Type:* ${logoType}%0A*Details:* ${details}%0A%0AI want to order a logo.`;
+      
+      // Open WhatsApp with the message
+      window.open(`https://wa.me/255775710774?text=${message}`, '_blank');
+      
+      // Close modal
+      orderModal.style.display = 'none';
+      
+      // Reset form
+      orderForm.reset();
+      
+      // Show confirmation
+      alert('Thank you! We are redirecting you to WhatsApp to complete your order.');
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        card.addEventListener('mouseleave', function() {
-          this.style.zIndex = '1';
-        });
-      });
-      
-      // Add scroll animation to elements
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-      
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, observerOptions);
-      
-      // Observe elements to animate on scroll
-      const animatedElements = document.querySelectorAll('.card, .benefit-item, .promo-card');
-      animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(el);
-      });
-      
-      // Add click effect to buttons
-      const buttons = document.querySelectorAll('.btn');
-      buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-          // Ripple effect
-          const ripple = document.createElement('span');
-          const rect = this.getBoundingClientRect();
-          const size = Math.max(rect.width, rect.height);
-          const x = e.clientX - rect.left - size / 2;
-          const y = e.clientY - rect.top - size / 2;
-          
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = x + 'px';
-          ripple.style.top = y + 'px';
-          ripple.classList.add('ripple');
-          
-          this.appendChild(ripple);
-          
-          setTimeout(() => {
-            ripple.remove();
-          }, 600);
-        });
-      });
-      
-      // Add logo glow effect on scroll
-      const headerLogo = document.querySelector('.logo-box');
-      window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        if (scrollPosition > 100) {
-          headerLogo.style.boxShadow = '0 0 25px rgba(0, 234, 255, 0.6)';
-        } else {
-          headerLogo.style.boxShadow = '';
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
         }
       });
     });
+
+    // Add scroll animation to elements
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
     
-    // Add ripple effect styles dynamically
-    const style = document.createElement('style');
-    style.textContent = `
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements to animate on scroll
+    const animatedElements = document.querySelectorAll('.card, .benefit-item, .promo-card');
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Add ripple effect to buttons
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Create ripple element
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add floating logo scroll effect
+    const floatingLogo = document.querySelector('.floating-logo');
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 300) {
+        floatingLogo.style.opacity = '1';
+        floatingLogo.style.visibility = 'visible';
+      } else {
+        floatingLogo.style.opacity = '0';
+        floatingLogo.style.visibility = 'hidden';
+      }
+    });
+
+    // Add CSS for ripple effect
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
       .ripple {
         position: absolute;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.6);
         transform: scale(0);
         animation: ripple-animation 0.6s linear;
+        pointer-events: none;
       }
       
       @keyframes ripple-animation {
@@ -868,8 +1148,13 @@
           opacity: 0;
         }
       }
+      
+      .btn {
+        position: relative;
+        overflow: hidden;
+      }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(rippleStyle);
   </script>
 </body>
   </html>
