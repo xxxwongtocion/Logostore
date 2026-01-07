@@ -975,7 +975,7 @@
         <p>Future Branding & Premium Logo Design</p>
         
         <div class="social-icons">
-          <a class="social-icon" href="https://wa.me/255775710774" target="_blank">
+          <a class="social-icon" href="https://wa.me/255775710774?text=Hello%20DarkX%20Official" target="_blank">
             <i class="fab fa-whatsapp"></i>
           </a>
           <a class="social-icon" href="https://whatsapp.com/channel/0029Vb7DYeT1SWsvrVaGWL2Y" target="_blank">
@@ -987,9 +987,9 @@
         </div>
         
         <div class="cta-buttons" style="margin-top: 30px;">
-          <button class="btn btn-primary" id="footerOrderButton">
+          <a class="btn btn-primary" href="https://wa.me/255775710774?text=Hello%20DarkX%20Official!%20I%20want%20to%20order%20a%20logo." target="_blank">
             <i class="fas fa-shopping-cart"></i> Order Your Logo
-          </button>
+          </a>
         </div>
         
         <p class="copyright">© 2023 DarkX Official • Future Branding • All Rights Reserved</p>
@@ -1001,7 +1001,7 @@
     // Modal functionality
     const orderModal = document.getElementById('orderModal');
     const orderButton = document.getElementById('orderButton');
-    const footerOrderButton = document.getElementById('footerOrderButton');
+    const footerOrderButton = document.querySelector('footer .btn-primary');
     const closeModal = document.getElementById('closeModal');
     const orderForm = document.getElementById('orderForm');
 
@@ -1011,8 +1011,11 @@
     });
 
     // Open modal from footer button
-    footerOrderButton.addEventListener('click', () => {
-      orderModal.style.display = 'flex';
+    footerOrderButton.addEventListener('click', (e) => {
+      // The footer button now directly links to WhatsApp, not modal
+      // So we prevent opening modal for footer button
+      e.preventDefault();
+      window.open(footerOrderButton.href, '_blank');
     });
 
     // Close modal when X is clicked
@@ -1040,7 +1043,7 @@
       // Create WhatsApp message
       const message = `Hello DarkX Official!%0A%0A*New Logo Order*%0A%0A*Name:* ${name}%0A*WhatsApp:* ${whatsapp}%0A*Logo Type:* ${logoType}%0A*Details:* ${details}%0A%0AI want to order a logo.`;
       
-      // Open WhatsApp with the message
+      // Open WhatsApp with the message using https://
       window.open(`https://wa.me/255775710774?text=${message}`, '_blank');
       
       // Close modal
